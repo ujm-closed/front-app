@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Train line Data - {{data.stationLabel}}</h2>
+<mat-dialog-content class="mat-typography">
+    <mat-card>
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="TRAIN-TIME-TABLE">
+                <h3>Real Time Data</h3>
+            </mat-tab>
+            <mat-tab label="REAL-TIME-DATA">
+                <h3>Real Time Data</h3>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>

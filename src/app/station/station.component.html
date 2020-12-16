@@ -1,0 +1,63 @@
+<div style="width: 80rem;" class="offset-md-1">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Station</th>
+                <th scope="col">City</th>
+                <th scope="col">Coordination</th>
+                <th scope="col">URI</th>
+                <th scope="col">COMMENT</th>
+                <th scope="col">BRANCH CODE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let option of tableData; let i=index">
+                <th scope="row">{{i}}</th>
+                <td>
+                    <a href="#" (click)="onTrainStaionClick(option)"> {{ option.comment }} </a>
+                </td>
+                <td>
+                    <img [src]="'https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg'" class="mr-2"
+                        style="width: 20px">
+                    {{ option.cityLabel}}
+                </td>
+                <td>{{ option.coordination }}</td>
+                <td>{{ option.stationUri }}</td>
+                <td>{{ option.stationLabel }}</td>
+                <td>{{ option.branchCode }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="stationData.length" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="refreshStationData()">
+        </ngb-pagination>
+
+        <!-- <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+    </select> -->
+    </div>
+    <!-- 
+<table class="table col-md-4 offset-md-4">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">City</th>
+            <th scope="col">CORDS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let option of stationData">
+            <td><a href="#" (click)="onTrainStaionClick(option)">{{option.stationLabel}}</a></td>
+            <td><a href="#" (click)="onTrainStaionClick(option)">{{option.cityLabel}}</a></td>
+            <td><a href="#" (click)="onTrainStaionClick(option)">{{option.coordination}}</a></td>
+            <td><a href="#" (click)="onTrainStaionClick(option)">{{option.stationUri}}</a></td>
+        </tr>
+    </tbody>
+</table> -->
+</div>

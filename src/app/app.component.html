@@ -17,9 +17,78 @@
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Welcome</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    <form class="form-inline my-2 my-lg-0 search-form">
+      <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+      <mat-form-field class="mr-sm-3">
+        <input type="text" class="form-control mr-sm-2" placeholder="Pick one" aria-label="Number" matInput
+          [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- https://www.npmjs.com/package/angular-ng-autocomplete -->
+      <!-- <ng-autocomplete class="col-md-6" [data]="data" [searchKeyword]="keyword" [itemTemplate]="itemTemplate"
+        (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+        [notFoundTemplate]="notFoundTemplate">
+      </ng-autocomplete> 
+      <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item"></a>
+      </ng-template>
+
+      <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+      </ng-template>-->
+      <button class="btn btn-outline-primary my-2 my-sm-0 offset-md-1" type="button"
+        (click)="searchOnClick()">Search</button>
     </form>
   </div>
 </nav>
+<div>
+  <router-outlet></router-outlet>
+</div>
+<div class="offset-md-2">
+  <!-- MORE MAP INPUTS AND EVENTS -->
+  <!-- https://angular-maps.com/api-docs/agm-core/components/agmmap#source  -->
+  <!-- lat46.2276  long2.2137-->
+  <agm-map [latitude]="lat" [longitude]="long" [draggableCursor]="'url(http://www.example.com/icon.png), auto;'"
+    [zoom]="10" [mapDraggable]="true" [disableDoubleClickZoom]="true" (mapClick)="mapClick($event)">
+
+    <!-- <agm-marker [latitude]="lat" [longitude]="long" [iconUrl]="'http://maps.google.com/mapfiles/kml/shapes/rail.png'">
+      <agm-info-window>
+        <h1>This point iskilometers from the center</h1>
+      </agm-info-window>
+    </agm-marker> -->
+    <ng-container *ngFor="let station of trainStationPlots; let i = index">
+      <agm-marker [latitude]="station.lat" [longitude]="station.long"
+        [iconUrl]="'http://maps.google.com/mapfiles/kml/shapes/rail.png'">
+        <agm-info-window>
+          <span class="badge badge-warning">{{station.label}}</span>
+        </agm-info-window>
+      </agm-marker>
+
+
+    </ng-container>
+
+    <agm-marker *ngFor="let item of hospitalPlots; let i = index" [latitude]="item.lat" [longitude]="item.long">
+      <agm-info-window>
+        <span class="badge badge-warning">{{item.label}}</span>
+      </agm-info-window>
+    </agm-marker>
+    <!-- [iconUrl]="'http://maps.google.com/mapfiles/kml/shapes/rail.png'" -->
+
+    <agm-marker [latitude]="lat" [longitude]="long">
+      <agm-info-window>
+        <h1>My location</h1>
+      </agm-info-window>
+    </agm-marker>
+
+    <agm-circle [latitude]="lat" [longitude]="long" [radius]="40" [fillColor]="'blue'" [circleDraggable]="false"
+      [editable]="false" (dragEnd)="radiusDragEnd($event)" (radiusChange)="radiusChange('radiusChange',$event)">
+    </agm-circle>
+  </agm-map>
+</div>
+
+<app-footer></app-footer>

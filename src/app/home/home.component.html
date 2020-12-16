@@ -1,0 +1,15 @@
+<!-- <app-map></app-map> -->
+<mat-card>
+
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="TRAIN-STATION">
+            <app-station [stationData]="trainStation"></app-station>
+        </mat-tab>
+        <mat-tab label="HOSPITAL">
+            <app-hospital></app-hospital>
+        </mat-tab>
+        <mat-tab label="BIKE-STATION">
+            <app-bike-station></app-bike-station>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>
