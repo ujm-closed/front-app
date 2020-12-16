@@ -25,7 +25,11 @@ import { BikeStationComponent } from './bike.station/bike.station.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TrainStationTimetableComponent } from './train-station-timetable/train-station-timetable.component';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
+  entryComponents: [
+    TrainStationTimetableComponent,
+  ],
   declarations: [
     AppComponent,
     HomeComponent,
@@ -56,7 +60,8 @@ import { TrainStationTimetableComponent } from './train-station-timetable/train-
     AutocompleteLibModule,
     MatTabsModule,
     NgbModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

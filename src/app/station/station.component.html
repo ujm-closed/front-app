@@ -15,7 +15,7 @@
             <tr *ngFor="let option of tableData; let i=index">
                 <th scope="row">{{i}}</th>
                 <td>
-                    <a href="#" (click)="onTrainStaionClick(option)"> {{ option.comment }} </a>
+                    <span role="button" (click)="onTrainStaionClick(option)"> {{ option.comment }} </span>
                 </td>
                 <td>
                     <img [src]="'https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg'" class="mr-2"

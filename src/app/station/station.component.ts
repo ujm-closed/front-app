@@ -29,6 +29,7 @@ export class StationComponent implements OnInit {
     this.refreshStationData();
   }
   onTrainStaionClick(stationItem) {
+    debugger
     this.openDialog(stationItem);
   }
   refreshStationData() {
@@ -42,9 +43,9 @@ export class StationComponent implements OnInit {
   }
   openDialog(stationItem) {
     const dialogRef = this.dialog.open(TrainStationTimetableComponent, { data: stationItem });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
   }
 
 }

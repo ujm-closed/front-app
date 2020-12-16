@@ -57,6 +57,10 @@ export class AppComponent implements OnInit {
       .subscribe(plots => this.onPlotEmitterTriggers(plots));
   }
   onPlotEmitterTriggers(plots) {
+    this.trainStationPlots = [];
+    this.hospitalPlots = [];
+    this.bikeStationPlots = [];
+
     if (plots.data.length > 0) {
       if (plots.type == "train") {
         plots.data.forEach((element, i) => {

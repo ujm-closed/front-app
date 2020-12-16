@@ -7,11 +7,47 @@
             </mat-tab>
             <mat-tab label="REAL-TIME-DATA">
                 <h3>Real Time Data</h3>
+                <div style="width: 80rem;" class="offset-md-1">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Direction</th>
+                                <th scope="col">Arrival</th>
+                                <th scope="col">Departure</th>
+                                <th scope="col">Network</th>
+                                <th scope="col">Label</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let option of realTimeDataFiltered; let i=index">
+                                <th scope="row">{{i}}</th>
+                                <td>
+                                    {{option.display_informations.commercial_mode}}{{option.display_informations.headsign}}
+                                </td>
+                                <td>
+                                    {{ option.display_informations.direction}}
+                                </td>
+                                <td>{{ option.stop_date_time.base_arrival_date_time}}</td>
+                                <td>{{ option.stop_date_time.base_departure_date_time}}</td>
+                                <td>{{ option.display_informations.network}}</td>
+                                <td>{{ option.display_informations.label}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-between p-2">
+                        <ngb-pagination [collectionSize]="realTimeData.length" [(page)]="page" [pageSize]="pageSize"
+                            (pageChange)="refreshRealTimeTableData()">
+                        </ngb-pagination>
+                    </div>
+                </div>
+
             </mat-tab>
         </mat-tab-group>
     </mat-card>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+    <button mat-button color="warn" mat-dialog-close>Cancel</button>
+    <button mat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>OK</button>
 </mat-dialog-actions>
