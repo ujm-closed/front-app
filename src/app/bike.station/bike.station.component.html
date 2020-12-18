@@ -1,1 +1,47 @@
-<p>bike.station works!</p>
+<div style="width: 80rem;" class="offset-md-1">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+
+                <th scope="col">#</th>
+                <th scope="col">Station</th>
+                <th scope="col">Brand</th>
+                <th scope="col">City</th>
+                <th scope="col">Address</th>
+                <th scope="col">Racks</th>
+                <th scope="col">Available</th>
+                <th scope="col">RecorderIn</th>
+                <th scope="col">Coordination</th>
+                <th scope="col">URI</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let option of tableData; let i=index">
+                <th scope="row">{{i}}</th>
+                <td>
+                    {{option.label}}
+                </td>
+                <td>{{ option.brand }}</td>
+                <td>
+                    <img [src]="'https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg'" class="mr-2"
+                        style="width: 20px">
+                    {{ option.cityName}}
+                </td>
+                <td>{{ option.address}}</td>
+                <td>{{ option.capacity}}</td>
+                <td>{{ option.availability}}</td>
+                <td>{{ option.recordedAt}}</td>
+                <td>{{ option.coordination}}</td>
+                <td>{{ option.uri}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="bikeStationData.length" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="refreshBikeStationData()">
+        </ngb-pagination>
+
+    </div>
+
+</div>

@@ -26,6 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TrainStationTimetableComponent } from './train-station-timetable/train-station-timetable.component';
 import { MatButtonModule } from '@angular/material/button';
+import { CreateRdfComponent } from './create-rdf/create-rdf.component';
 @NgModule({
   entryComponents: [
     TrainStationTimetableComponent,
@@ -38,6 +39,7 @@ import { MatButtonModule } from '@angular/material/button';
     HospitalComponent,
     BikeStationComponent,
     TrainStationTimetableComponent,
+    CreateRdfComponent,
     // MapComponent,
 
   ],

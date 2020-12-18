@@ -29,4 +29,8 @@ export class CityService {
         return this.http.post<any>(
             this.baseUrl + "city/search", cityName, { observe: 'response' });
     }
+    save(cityObj): Observable<HttpResponse<any>> {
+        return this.http.post<any>(
+            this.baseUrl + "city/save", cityObj, { observe: 'response' });
+    }
 }

@@ -1,0 +1,33 @@
+<form class="offset-md-3; col-md-4" style="margin-left: 35rem;">
+    <div class="form-group">
+        <label for="formGroupExampleInput">City URI</label>
+        <input type="url" class="form-control" placeholder="https://www.wikidata.org/wiki/Q2486002"
+            [formControl]="cityUri">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">City Name</label>
+        <input type="text" class="form-control" placeholder="Gare de Saint-Étienne-Châteaucreux"
+            [formControl]="cityLabel">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">City Longitute</label>
+        <input type="number" class="form-control" placeholder="45.2" [formControl]="long">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">City Latitude</label>
+        <input type="number" class="form-control" placeholder="13.23" [formControl]="lat">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">City Coment</label>
+        <input type="text" class="form-control" placeholder="" [formControl]="cityComment">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Country URI</label>
+        <input type="text" class="form-control" placeholder="13.23" [formControl]="countryUri">
+    </div>
+    <button type="button" class="btn btn-outline-primary" (click)="onSubmit()">Submit</button>
+    <button style="margin-left: 1rem;" type="button" class="btn btn-outline-danger">Reset</button>
+</form>
+<div class="alert alert-primary" *ngIf="isSaved" role="alert">
+    {{message}}
+</div>

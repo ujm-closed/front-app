@@ -1,3 +1,4 @@
+import { JsonLDService } from './pub.service/json-ld.service';
 import { PublicEmitter } from './pub.service/public.emiters';
 import { StationService } from './api/station.service';
 import { AppConst } from './const/city.name';
@@ -19,6 +20,8 @@ export class AppComponent implements OnInit {
   trainStationPlots: any[] = [];
   bikeStationPlots: any[] = [];
   hospitalPlots: any[] = [];
+  mapPlots: any[] = [];
+
   cityCoord: any;
   lat: number;
   long: number;
@@ -28,7 +31,10 @@ export class AppComponent implements OnInit {
   // options: string[] = ['One', 'Two', 'Three'];
   options: string[] = [];
   filteredOptions: Observable<string[]>;
-  constructor(private cityService: CityService, private stationService: StationService, private publicEmitter: PublicEmitter) { }
+  constructor(private cityService: CityService,
+    private stationService: StationService,
+    private publicEmitter: PublicEmitter,
+    private jsonLdService: JsonLDService) { }
   keyword = 'name';
   data = [
   ];
@@ -46,7 +52,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.getCurrentLoaction();
     this.getAllCity();
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -60,25 +65,32 @@ export class AppComponent implements OnInit {
     this.trainStationPlots = [];
     this.hospitalPlots = [];
     this.bikeStationPlots = [];
-
     if (plots.data.length > 0) {
+
+
       if (plots.type == "train") {
         plots.data.forEach((element, i) => {
           if (i == 0) {
             this.lat = element.coordination.split("(")[1].split(" ")[1].split(")")[0];
             this.long = element.coordination.split("(")[1].split(" ")[0]
           }
-          this.trainStationPlots.push({ "label": element.stationLabel, "long": element.coordination.split("(")[1].split(" ")[0], "lat": element.coordination.split("(")[1].split(" ")[1].split(")")[0] });
+          // this.trainStationPlots.push({ "label": element.stationLabel, "long": element.coordination.split("(")[1].split(" ")[0], "lat": element.coordination.split("(")[1].split(" ")[1].split(")")[0] });
+          // this.trainStationPlots.push({ "img":"http://maps.google.com/mapfiles/ms/icons/rail.png" , "label": element.stationLabel, "long": element.coordination.split("(")[1].split(" ")[0], "lat": element.coordination.split("(")[1].split(" ")[1].split(")")[0] });
+          this.mapPlots.push({ "img": "http://maps.google.com/mapfiles/ms/icons/rail.png", "label": element.stationLabel, "long": element.coordination.split("(")[1].split(" ")[0], "lat": element.coordination.split("(")[1].split(" ")[1].split(")")[0] });
         });
       }
       if (plots.type == "hospital") {
-        plots.data.forEach((element) => {
-          this.hospitalPlots.push(element.coordination);
+        plots.data.forEach((element, i) => {
+          // this.hospitalPlots.push({ "img":"http://maps.google.com/mapfiles/ms/icons/hospitals.png", "label": element.label, "long": element.coordination.split("(")[1].split(" ")[0], "lat": element.coordination.split("(")[1].split(" ")[1].split(")")[0] });
+          this.mapPlots.push({ "img": "http://maps.google.com/mapfiles/ms/icons/hospitals.png", "label": element.label, "long": element.coordination.split("(")[1].split(" ")[0], "lat": element.coordination.split("(")[1].split(" ")[1].split(")")[0] });
+
         });
       }
       if (plots.type == "bikeStation") {
-        plots.data.forEach(element => {
-          this.bikeStationPlots.push(element.coordination);
+        plots.data.forEach((element, i) => {
+          // this.hospitalPlots.push({ "img":"http://maps.google.com/mapfiles/ms/icons/hospitals.png", "label": element.label, "long": element.coordination.split("(")[1].split(" ")[0], "lat": element.coordination.split("(")[1].split(" ")[1].split(")")[0] });
+          this.mapPlots.push({ "img": "http://maps.google.com/mapfiles/ms/icons/cycling.png", "label": element.label, "long": element.coordination.split("(")[1].split(" ")[0], "lat": element.coordination.split("(")[1].split(" ")[1].split(")")[0] });
+
         });
       }
     }
@@ -111,6 +123,7 @@ export class AppComponent implements OnInit {
     console.log($event);
   }
   searchOnClick() {
+    this.mapPlots = [];
     let selectedSity = this.myControl.value;
     if (!selectedSity) {
       return;

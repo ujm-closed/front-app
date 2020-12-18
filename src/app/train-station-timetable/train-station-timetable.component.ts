@@ -21,13 +21,37 @@ export class TrainStationTimetableComponent implements OnInit {
     this.getRealTimeDataSNCF();
   }
   getRealTimeDataSNCF() {
-    debugger;
     this.stationService.getRealTimeTrainSNCF(this.data.branchCode)
       .subscribe(res => {
-        debugger
         this.realTimeData = res.body.departures;
+        this.updateRealTimeDataTimeTable(this.realTimeData, this.data.stationUri);
       })
   }
+
+  updateRealTimeDataTimeTable(data, uri) {
+    let timeTable = [];
+    data.forEach(element => {
+      timeTable.push({
+        stationUri: uri,
+        stopPoint: element.stop_point.lable,
+        commercialModes: element.stop_point.commercial_modes.name,
+        transportMean: element.stop_point.physical_modes.name,
+        timeTableDirection: element.display_informations.direction,
+        arrivingTime: element.stop_date_time.base_arrival_date_time,
+        departingTime: element.stop_date_time.base_departure_date_time,
+        timeTableNetwork: element.display_informations.network,
+        timeTableLabel: element.display_informations.label,
+        tripId: element.route.direction.id
+      })
+    });
+    this.stationService.postStation(timeTable)
+      .subscribe(res => {
+        console.log(res)
+      }, error => {
+        console.log(error)
+      })
+  }
+
   refreshRealTimeTableData() {
     this.realTimeDataFiltered = this.realTimeData
       .map((country, i) => ({ id: i + 1, ...country }))

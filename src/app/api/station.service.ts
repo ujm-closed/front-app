@@ -33,17 +33,17 @@ export class StationService {
     // http://doc.navitia.io/#second-step
     getRealTimeTrainSNCF(areaCode): Observable<HttpResponse<any>> {
         let todayDate = new Date();
-        // let date = todayDate.getFullYear() + '-' + (todayDate.getMonth() + 1) + '-' + todayDate.getDate();
-        // let time = todayDate.getHours() + ":" + todayDate.getMinutes() + ":" + todayDate.getSeconds();
         let preparedDateTime = todayDate.getFullYear() + (todayDate.getMonth() + 1) + todayDate.getDate()
             + "T" + todayDate.getHours() + todayDate.getMinutes() + todayDate.getSeconds();
-        // 20201206T220714
-
         let headers = new HttpHeaders();
         headers = headers.set('Authorization', environment.sncf);
-        // .set('Content-Type', 'application/json; charset=utf-8');
-        // stop_area:OCE:SA:87391003
         let sncfUrl = "https://api.sncf.com/v1/coverage/sncf/stop_areas/" + areaCode + "/departures?datetime=" + preparedDateTime;
         return this.http.get<any>(sncfUrl, { headers: headers, observe: 'response' });
+    }
+    //SaveRealTimeDataAsRDF
+    postStation(stations) {
+        return this.http.post<any>(
+            this.baseUrl + "station/upload", stations, { observe: 'response' });
+
     }
 }

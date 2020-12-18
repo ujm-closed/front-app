@@ -6,10 +6,13 @@
             <app-station [stationData]="trainStation"></app-station>
         </mat-tab>
         <mat-tab label="HOSPITAL">
-            <app-hospital></app-hospital>
+            <app-hospital [hospitalData]="hospitals"></app-hospital>
         </mat-tab>
         <mat-tab label="BIKE-STATION">
-            <app-bike-station></app-bike-station>
+            <app-bike-station [bikeStationData]="bikeStations"></app-bike-station>
         </mat-tab>
     </mat-tab-group>
 </mat-card>
+<div class="alert alert-primary" *ngIf="isWeather" role="alert">
+    Current weather in the city is {{weather.description}} : {{weather.temperatureValue}} (Kelvin)
+</div>

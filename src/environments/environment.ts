@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   gapi: "AIzaSyDnh2kJqleAmp-CXefPAG-a9q2tXt-YIyI",
-  sncf: "751ba723-0947-4f77-a1d0-936ab68b07a1"
+  sncf: "751ba723-0947-4f77-a1d0-936ab68b07a1",
+  weatherApi: "aea6de95edmshb5f6530eede1b3fp13a018jsnf1580e67bbe7"
 };
 
 /*

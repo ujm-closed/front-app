@@ -11,7 +11,7 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Map</a>
+        <a class="nav-link" href="#/create">Create New RDF</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Welcome</a>
@@ -56,27 +56,40 @@
   <agm-map [latitude]="lat" [longitude]="long" [draggableCursor]="'url(http://www.example.com/icon.png), auto;'"
     [zoom]="10" [mapDraggable]="true" [disableDoubleClickZoom]="true" (mapClick)="mapClick($event)">
 
-    <!-- <agm-marker [latitude]="lat" [longitude]="long" [iconUrl]="'http://maps.google.com/mapfiles/kml/shapes/rail.png'">
-      <agm-info-window>
-        <h1>This point iskilometers from the center</h1>
-      </agm-info-window>
-    </agm-marker> -->
-    <ng-container *ngFor="let station of trainStationPlots; let i = index">
+    <!-- http://maps.google.com/mapfiles/kml/shapes/rail.png -->
+
+
+    <ng-container *ngFor="let item of mapPlots; let i = index">
+      <agm-marker [latitude]="item.lat" [longitude]="item.long" [iconUrl]="item.img">
+        <agm-info-window>
+          <span class="badge badge-warning">{{item.label}}</span>
+        </agm-info-window>
+      </agm-marker>
+    </ng-container>
+
+    <!-- <ng-container *ngFor="let station of trainStationPlots; let i = index">
       <agm-marker [latitude]="station.lat" [longitude]="station.long"
         [iconUrl]="'http://maps.google.com/mapfiles/kml/shapes/rail.png'">
         <agm-info-window>
           <span class="badge badge-warning">{{station.label}}</span>
         </agm-info-window>
       </agm-marker>
-
-
     </ng-container>
+    <ng-container *ngFor="let hospital of hospitalPlots; let i = index">
+      <agm-marker [latitude]="hospital.lat" [longitude]="hospital.long"
+        [iconUrl]="'http://maps.google.com/mapfiles/ms/icons/hospitals.png'">
+        <agm-info-window>
+          <span class="badge badge-warning">{{hospital.label}}</span>
+        </agm-info-window>
+      </agm-marker>
+    </ng-container> -->
 
-    <agm-marker *ngFor="let item of hospitalPlots; let i = index" [latitude]="item.lat" [longitude]="item.long">
+    <!-- http://maps.google.com/mapfiles/ms/icons/cycling.png -->
+    <!-- <agm-marker *ngFor="let item of hospitalPlots; let i = index" [latitude]="item.lat" [longitude]="item.long">
       <agm-info-window>
         <span class="badge badge-warning">{{item.label}}</span>
       </agm-info-window>
-    </agm-marker>
+    </agm-marker> -->
     <!-- [iconUrl]="'http://maps.google.com/mapfiles/kml/shapes/rail.png'" -->
 
     <agm-marker [latitude]="lat" [longitude]="long">
@@ -85,7 +98,7 @@
       </agm-info-window>
     </agm-marker>
 
-    <agm-circle [latitude]="lat" [longitude]="long" [radius]="40" [fillColor]="'blue'" [circleDraggable]="false"
+    <agm-circle [latitude]="lat" [longitude]="long" [radius]="500" [fillColor]="'blue'" [circleDraggable]="false"
       [editable]="false" (dragEnd)="radiusDragEnd($event)" (radiusChange)="radiusChange('radiusChange',$event)">
     </agm-circle>
   </agm-map>
